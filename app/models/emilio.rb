@@ -1,0 +1,2 @@
+class Emilio < ApplicationRecord
+end
