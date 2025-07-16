@@ -4,5 +4,6 @@
  <div>
    <strong> <%= article.name %> </strong> <br>
     <%= article.description %>
+    <%= link_to 'See more', article_path(article) %>
  </div>
 <% end %>
