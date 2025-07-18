@@ -1,6 +1,15 @@
 <h1> Show Article </h1>
 
 <div>
-  <strong> <%= @article.name %> </strong> <br>
-  <p><%= @article.description %></p>
+  <h3> <%= @article.name %> </h3>
+  <div>
+    <%= @article.description %>
   </div>
+
+  <div>
+    <%= link_to 'Edit Article', edit_article_path(@article) %>
+  </div>
+  <div>
+    <%= button_to 'Delete Article', article_destroy_path(@article), method: :delete %>
+  </div>
+</div>
