@@ -10,7 +10,8 @@
   </head>
 
   <body>
-   <%= render "shared/header" %> # Está línea incluye el encabezado compartido en todas las páginas
+   <%= render "shared/header" %> 
+   <%= notice if notice %>
     </nav>  
     <%= yield %>
   </body>
