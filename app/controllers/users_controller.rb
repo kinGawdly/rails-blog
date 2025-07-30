@@ -1,5 +1,15 @@
 class UsersController < ApplicationController
+    skip_before_action :authenticate_user!, only: [:new, :create]
+    
+    
     def new
+        @user = User.new
+        # Initialize a new user object for the signup form
+    end
+
+    def index
+        @users = User.all
+        # Fetch all users to display in the index view
     end
 
     def create
@@ -16,7 +26,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-      params.require(:session).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end 
 
 end

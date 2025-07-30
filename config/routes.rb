@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
+
+  get '/login', to: 'sessions#login', as: 'login'
+  post '/login', to: 'sessions#create', as: 'create_session'
+
+  get '/users', to: 'users#index'
   
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create', as: 'create_user'
