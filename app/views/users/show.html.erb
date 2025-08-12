@@ -1,0 +1,8 @@
+<h1> Users </h1>    
+
+<div>
+   <%= @user.email %> <br>
+   <%= link_to 'Edit Profile', edit_user_path(@user) %> <br>
+   <%= button_to 'Delete Account', user_destroy_path(@user), method: :delete %>
+   <br>
+</div>

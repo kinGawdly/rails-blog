@@ -23,7 +23,8 @@ class ArticlesController < ApplicationController
 
     
     def create
-        @article = Article.new(article_params)
+        @article = current_user.articles.build(article_params)
+        # Build a new article associated with the current user
         if @article.save
             redirect_to articles_path, notice: "Article was successfully created."
             # Redirect to the show page of the newly created article
