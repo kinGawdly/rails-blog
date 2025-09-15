@@ -4,4 +4,5 @@ class User < ApplicationRecord
     validates :password_confirmation, presence: true 
     has_secure_password # This adds methods to set and authenticate against a BCrypt password.
     has_many :articles
+    has_one :profile
 end

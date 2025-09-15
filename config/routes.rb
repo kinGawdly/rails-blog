@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
 
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index'
   
   get '/signup', to: 'users#new', as: 'signup'
-  post '/signup', to: 'users#create', as: 'create_user'
+  post '/users', to: 'users#create', as: 'create_user'
 
 
   patch '/articles/:id', to: 'articles#update', as: 'update_article'
