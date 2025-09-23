@@ -45,6 +45,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            UserMailer.with(user: @user).confirm_account.deliver_later
             session[:user_id] = @user.id
             redirect_to root_path, notice: "User was successfully created."
             # Redirect to the articles index page after successful user creation
