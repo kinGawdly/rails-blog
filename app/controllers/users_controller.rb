@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authenticate_user!, only: [:new, :create]
+    skip_before_action :authenticate_user!, only: [:new, :create, :confirm_email]
     before_action :set_user, only: %i[show edit update destroy] 
     
     def index
@@ -38,6 +38,12 @@ class UsersController < ApplicationController
         # Redirect to the users index page after successful deletion
     end
 
+    def confirm_email
+        user = User.find_by(token: params[:token])
+        user.update!(is_confirmed?: true)
+        redirect_to login_path, notice: "Your email has been confirmed. Please log in."
+    end
+
     # This action handles user signup
     # It creates a new user and logs them in if successful
 
@@ -46,8 +52,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             UserMailer.with(user: @user).confirm_account.deliver_later
-            session[:user_id] = @user.id
-            redirect_to root_path, notice: "User was successfully created."
+            redirect_to login_path, notice: "An email was sent to your account to confirm your email address."
             # Redirect to the articles index page after successful user creation
         else
             render :new, status: :unprocessable_entity
