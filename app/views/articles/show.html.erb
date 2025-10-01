@@ -7,6 +7,14 @@
   </div>
 
   <div>
+    <%= image_tag(@article.avatar) if @article.avatar.attached? %>
+  </div>
+
+  <div class="trix-content">
+    <%= @article.body %>
+  </div>
+
+  <div>
     <%= link_to 'Edit Article', edit_article_path(@article) %>
   </div>
   <div>
