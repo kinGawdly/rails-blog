@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-    # This will set @article for the specified actions  
+    before_action :categories_ids, only: [:create]
+
     def index
         @articles = Article.all
         end
@@ -24,29 +25,33 @@ class ArticlesController < ApplicationController
     
     def create
         @article = current_user.articles.build(article_params)
-        # Build a new article associated with the current user
+        @article.add_categories(categories_ids)
         if @article.save
             redirect_to articles_path, notice: "Article was successfully created."
-            # Redirect to the show page of the newly created article
         else
             render :new, status: :unprocessable_entity
-            # Render the new template if validation fails
         end
     end
     
     def destroy
         @article.destroy
         redirect_to articles_path
-        # Redirect to the index page after deletion
     end
+
+
+
+
     private
 
     def article_params
-        params.require(:article).permit(:name, :description, :avatar, :body)
+        params.require(:article).permit(:name, :description, :avatar, :body, category_ids: [])
     end
+
+    def categories_ids
+       article_params[:category_ids]&.reject(&:blank?) || []
+    end 
 
     def set_article
         @article = Article.find(params[:id])
     end
-        # This method can be used to DRY up the code in show, edit, update  
 end
