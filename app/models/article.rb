@@ -7,10 +7,5 @@ class Article < ApplicationRecord
     # Ensure that both name and description are present
     belongs_to :user
 
-    def add_categories(ids)
-        debugger
-        ids.each do |category_id|
-            self.categories << Category.find(category_id)
-        end
-    end
-end 
+end
+

@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-    before_action :categories_ids, only: [:create]
 
     def index
         @articles = Article.all
@@ -17,15 +16,16 @@ class ArticlesController < ApplicationController
     end
 
     def update
-        @article.update(article_params)
-        redirect_to article_path(@article)
-        # Redirect to the show page of the updated article
+        if @article.update(article_params)
+             redirect_to article_path(@article), notice: "Article was successfully updated."
+        else
+            render :edit, status: :unprocessable_entity
+        end 
     end
 
     
     def create
         @article = current_user.articles.build(article_params)
-        @article.add_categories(categories_ids)
         if @article.save
             redirect_to articles_path, notice: "Article was successfully created."
         else
@@ -47,9 +47,7 @@ class ArticlesController < ApplicationController
         params.require(:article).permit(:name, :description, :avatar, :body, category_ids: [])
     end
 
-    def categories_ids
-       article_params[:category_ids]&.reject(&:blank?) || []
-    end 
+  
 
     def set_article
         @article = Article.find(params[:id])
