@@ -27,4 +27,19 @@
   <div>
     <%= button_to 'Delete Article', article_destroy_path(@article), method: :delete %>
   </div>
+
+  <hr>
+
+  <div>
+    <h4> Comments </h4>
+    <% @article.comments.each do |comment| %>
+      <%= render 'comments/comment', comment: comment %>
+    <% end %>
+  </div>
+
+  <div>
+      <h5> Add a Comment </h5>
+      <%= render 'comments/form', {article: @article, comment: @comment} %>
+  </div>
+  
 </div>

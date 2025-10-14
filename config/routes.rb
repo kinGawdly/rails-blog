@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments, except: %i[index new show]
   resources :categories
   resources :profiles
 

@@ -3,7 +3,8 @@ class Article < ApplicationRecord
     validates :description, presence: true
     has_one_attached :avatar 
     has_rich_text :body
-    has_and_belongs_to_many :categories  
+    has_and_belongs_to_many :categories
+    has_many :comments  
     # Ensure that both name and description are present
     belongs_to :user
 

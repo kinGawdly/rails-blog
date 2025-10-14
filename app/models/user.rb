@@ -5,6 +5,7 @@ class User < ApplicationRecord
     validates :password_confirmation, length: { minimum: 6 }, if: :password_present?
     has_secure_password # This adds methods to set and authenticate against a BCrypt password.
     has_many :articles
+    has_many :comments
     has_one :profile
 
     private
