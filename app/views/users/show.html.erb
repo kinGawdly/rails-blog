@@ -3,6 +3,6 @@
 <div>
    <%= @user.email %> <br>
    <%= link_to 'Edit Profile', edit_user_path(@user) %> <br>
-   <%= button_to 'Delete Account', user_destroy_path(@user), method: :delete %>
+   <%= button_to 'Delete Account', user_destroy_path(@user), method: :delete, data: { confirm: 'Are you sure?' } %>
    <br>
 </div>

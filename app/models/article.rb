@@ -4,7 +4,7 @@ class Article < ApplicationRecord
     has_one_attached :avatar 
     has_rich_text :body
     has_and_belongs_to_many :categories
-    has_many :comments  
+    has_many :comments , dependent: :destroy
     # Ensure that both name and description are present
     belongs_to :user
 
