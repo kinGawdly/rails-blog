@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.test-btn {
+  @apply text-center text-blue-500;
+}
