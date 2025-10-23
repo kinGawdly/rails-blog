@@ -1,0 +1,2 @@
+class Maquillaje < ApplicationRecord
+end

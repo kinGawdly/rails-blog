@@ -3,3 +3,4 @@
 //= link_directory ../javascripts .js
 //= link actiontext.css
 //= link activestorage.js
+//= link_tree ../builds
